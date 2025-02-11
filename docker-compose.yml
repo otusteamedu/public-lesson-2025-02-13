@@ -65,6 +65,12 @@ services:
       - dump-external:/app/dump
       - postgresql-external:/var/lib/postgresql/data
 
+  openapi-generator:
+    image: openapitools/openapi-generator-cli:latest
+    volumes:
+      - ./:/local
+    command: ["generate", "-i", "/local/internal/apidoc.yaml", "-g", "php-dt", "-o", "/local/api-client"]
+
 volumes:
   dump-internal:
   postgresql-internal:

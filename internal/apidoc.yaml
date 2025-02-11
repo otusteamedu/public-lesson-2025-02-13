@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  title: 'My App'
+  description: 'This is an awesome app!'
+  version: 1.0.0
+paths:
+  /api/v1/create-user:
+    post:
+      tags:
+        - user
+      description: 'Создание пользователя'
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '200':
+          description: 'Успешный ответ'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserResponse'
+        '400':
+          description: 'Ошибка валидации'
+  '/api/v1/get-user/{id}':
+    get:
+      tags:
+        - user
+      description: 'Получение пользователя'
+      operationId: getUser
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Идентификатор пользователя'
+          required: true
+          schema:
+            type: integer
+            pattern: \d+
+      responses:
+        '200':
+          description: 'Успешный ответ'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+        '404':
+          description: 'Пользователь не найден'
+components:
+  schemas:
+    CreateUserRequest:
+      required:
+        - login
+        - password
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+      type: object
+    CreateUserResponse:
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+      type: object
+    GetUserResponse:
+      required:
+        - id
+        - login
+        - password
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        password:
+          type: string
+      type: object
+tags:
+  -
+    name: user
+    description: user
+
