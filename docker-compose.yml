@@ -1,0 +1,72 @@
+version: '3.7'
+
+services:
+  php-fpm-internal:
+    build: docker
+    container_name: 'php-internal'
+    volumes:
+      - ./internal/:/app
+    working_dir: /app
+
+  nginx-internal:
+    image: nginx
+    container_name: 'nginx-internal'
+    working_dir: /app
+    ports:
+      - '7778:80'
+    volumes:
+      - ./internal/:/app
+      - ./docker/nginx-internal.conf:/etc/nginx/conf.d/default.conf
+
+  postgres-internal:
+    image: postgres:15
+    ports:
+      - 25432:5432
+    container_name: 'postgresql-internal'
+    working_dir: /app
+    restart: always
+    environment:
+      POSTGRES_DB: 'internal'
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'password'
+    volumes:
+      - dump-internal:/app/dump
+      - postgresql-internal:/var/lib/postgresql/data
+
+  php-fpm-external:
+    build: docker
+    container_name: 'php-external'
+    volumes:
+      - ./external/:/app
+    working_dir: /app
+
+  nginx-external:
+    image: nginx
+    container_name: 'nginx-external'
+    working_dir: /app
+    ports:
+      - '7777:80'
+    volumes:
+      - ./external/:/app
+      - ./docker/nginx-external.conf:/etc/nginx/conf.d/default.conf
+
+  postgres-external:
+    image: postgres:15
+    ports:
+      - 15432:5432
+    container_name: 'postgresql-external'
+    working_dir: /app
+    restart: always
+    environment:
+      POSTGRES_DB: 'external'
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'password'
+    volumes:
+      - dump-external:/app/dump
+      - postgresql-external:/var/lib/postgresql/data
+
+volumes:
+  dump-internal:
+  postgresql-internal:
+  dump-external:
+  postgresql-external:
