@@ -38,6 +38,7 @@ services:
     container_name: 'php-external'
     volumes:
       - ./external/:/app
+      - ./api-client/:/api-client
     working_dir: /app
 
   nginx-external:
