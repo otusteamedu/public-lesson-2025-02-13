@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "e4329b84-7170-425b-a7b8-0627a54da6b3",
+		"name": "Public lesson 2025-02-13",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30057528"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"my_user\",\r\n    \"password\": \"my_pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7778/api/v1/create-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7778",
+					"path": [
+						"api",
+						"v1",
+						"create-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user profile",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"my_user\",\r\n    \"password\": \"my_pass\",\r\n    \"name\": \"Ivan\",\r\n    \"surname\": \"Ivanov\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7777/api/v1/create-user-profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"api",
+						"v1",
+						"create-user-profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7778/api/v1/get-user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7778",
+					"path": [
+						"api",
+						"v1",
+						"get-user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user profile",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7777/api/v1/get-user-profile/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"api",
+						"v1",
+						"get-user-profile",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
